@@ -7,8 +7,7 @@ Install dependencies:
 monaco-editor (VS Code-like editor)
 socket.io-client (WebSocket for real-time updates)
 react-router-dom (Navigation)
-axios (API calls)
-webrtc (for optional voice/video chat)
+axios (API calls) 
 
 2️⃣ Setup Routing
 Install react-router-dom.
