@@ -1,7 +1,7 @@
 import React, { useState } from "react"; 
 import { Link, useNavigate } from "react-router-dom";  
 import { assets } from "../assets/assets";
-import Navbar from "./Navbar";
+// import Navbar from "./Navbar";
 import axios from "axios";
 import { Mail, Lock } from "lucide-react";  
 import API_URL from "../../config";
@@ -27,7 +27,7 @@ function Login() {
       setMessage({ text: "🎉 Login Successful!", type: "success" });
  
       setTimeout(() => {
-        navigate("/blog");
+        navigate("/landingPage");
       }, 1000);
     } catch (error) {
       console.error("Login failed:", error.response?.data || error.message);
@@ -44,9 +44,9 @@ function Login() {
         <img className="absolute w-full h-full object-cover brightness-50" src={assets.LoginBackground} alt="Background" /> 
 
         {/* Navbar */}
-        <div className="absolute top-0 left-0 w-full z-10">
+        {/* <div className="absolute top-0 left-0 w-full z-10">
           <Navbar />
-        </div>
+        </div> */}
 
         {/* Login Form */}
         <form 

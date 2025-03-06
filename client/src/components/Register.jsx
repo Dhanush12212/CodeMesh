@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { assets } from "../assets/assets";
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
+// import Navbar from "./Navbar";
 import axios from "axios";
 import { User, Mail, Lock } from "lucide-react";  
-import API_URL from "../../config";
+import API_URL from '../../config.js'
 
 function Register() {
   const navigate = useNavigate();
@@ -27,8 +27,8 @@ function Register() {
       setMessage({ text: "🎉 Registration Successful! Redirecting...", type: "success" });
 
       setTimeout(() => {
-        navigate("/blog");
-      }, 1500);
+        navigate("/landingPage");
+      }, 1000);
     } catch (error) {
       console.error("Registration failed:", error.response?.data || error.message);
       setMessage({ text: " Registration Failed. Try again.", type: "error" });
@@ -42,9 +42,9 @@ function Register() {
         <img className="absolute w-full h-full object-cover brightness-50" src={assets.LoginBackground} alt="Background" />
 
         {/* Navbar */}
-        <div className="absolute top-0 left-0 w-full z-10">
+        {/* <div className="absolute top-0 left-0 w-full z-10">
           <Navbar />
-        </div>
+        </div> */}
 
         {/* Register Form */}
         <form 
