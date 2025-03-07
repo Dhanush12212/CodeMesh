@@ -39,7 +39,7 @@ function Register() {
     <>  
       <div className="w-full h-screen relative flex flex-col items-center justify-center px-4 sm:px-0">
         {/* Background Image */}
-        <img className="absolute w-full h-full object-cover brightness-50" src={assets.LoginBackground} alt="Background" />
+        <img className="absolute w-full h-full object-cover brightness-60" src={assets.LoginBackground} alt="Background" />
 
         {/* Navbar */}
         {/* <div className="absolute top-0 left-0 w-full z-10">
@@ -49,10 +49,9 @@ function Register() {
         {/* Register Form */}
         <form 
           onSubmit={handleSubmit} 
-          
-          className="relative z-20 w-full max-w-[440px] bg-transparent border-2 border-white/50 rounded-3xl flex flex-col items-center text-blue-300 p-6 sm:p-10 h-[480px] justify-center  "
-          style={{ backdropFilter: "blur(20px)", boxShadow: "0 0 30px rgba(0,0,0,.5)" }}
+          className="relative z-20 w-full md:w-[450px] lg:w-[500px] lg:h-[500px] max-w-[550px] max-h-[550px] min-h-[400px] bg-transparent border-2 border-white/50 rounded-3xl flex flex-col items-center text-blue-300 p-7 sm:p-10 justify-center backdrop-blur-2xl shadow-2xl shadow-black/50"
         >
+
           <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6">Register</h1>
 
           {/* Success/Error Message */}
@@ -107,7 +106,7 @@ function Register() {
           {/* Submit */}
           <button 
             type="submit" 
-            className="mt-6 w-[60%] py-3 sm:py-4 border bg-[#027ED1ff] text-white font-semibold rounded-full hover:bg-blue-500 transition duration-200 text-base sm:text-lg cursor-pointer"
+            className="mt-6 w-[60%] py-3 sm:py-4 border bg-[#36670F] text-white font-semibold rounded-full hover:bg-green-800 transition duration-200 text-base sm:text-lg cursor-pointer"
           >
             Register
           </button>

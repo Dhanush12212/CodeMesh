@@ -1,7 +1,7 @@
-// import LandingBackground from './LandingBackground.png';
-import LoginBackground from './LoginBackground.jpg'
+import LandingBackground from './LandingBackground.jpg'
+import LoginBackground from './LoginBackground.jpeg'
 
 export const assets = {
-    // LandingBackground,
+    LandingBackground,
     LoginBackground,
 }
