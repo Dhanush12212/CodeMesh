@@ -3,6 +3,7 @@ dotenv.config();
 
 import express from 'express'; 
 import AuthRoute from './routes/AuthRoute.js';
+import EditorRoute from './routes/EditorRoute.js';
 import cookieParser from 'cookie-parser';
 import connectDB from './db/connectDB.js';
 import cors from 'cors'
@@ -20,8 +21,9 @@ app.use(cors({
     credentials:true,
 }));
 
-
+// Routes
 app.use('/api/Auth',AuthRoute);
+app.use('/api/Code', EditorRoute);
 
 const startServer = async() => {
     try {

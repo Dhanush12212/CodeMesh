@@ -28,7 +28,7 @@ function Login() {
  
       setTimeout(() => {
         navigate("/landingPage");
-      }, 1000);
+      }, 500);
     } catch (error) {
       console.error("Login failed:", error.response?.data || error.message);
 
@@ -51,7 +51,7 @@ function Login() {
         {/* Login Form */}
         <form 
             onSubmit={handleSubmit} 
-            className="relative z-20 w-full md:w-[450px] lg:w-[500px] lg:h-[500px] min-h-[380px] md:h-[450px] sm:h-[400px] bg-transparent border-2 border-white/50 rounded-3xl flex flex-col items-center text-blue-300 p-12 md:px-10 sm:p-10 justify-center backdrop-blur-2xl shadow-xl shadow-black/50"
+            className="relative z-20 w-full md:w-[450px] lg:w-[500px] lg:h-[500px] min-h-[380px] md:h-[450px] sm:h-[400px] bg-transparent border-2 border-white/50 rounded-3xl flex flex-col items-center text-green-300 p-6 md:px-20  justify-center backdrop-blur-2xl shadow-xl shadow-black/50"
         >
 
           <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6">Login</h1>
@@ -64,7 +64,7 @@ function Login() {
           )}
 
           {/* Email */}
-          <div className="w-full mb-4 flex items-center border border-white/30 rounded-md p-3 sm:p-4">
+          <div className="w-full mb-4 flex items-center border border-white/70 rounded-md p-3 sm:p-4">
             <Mail className="text-white mr-3" size={20} />
             <input 
               type="text" 
@@ -77,7 +77,7 @@ function Login() {
           </div>
           
           {/* Password */}
-          <div className="w-full mb-4 flex items-center border border-white/30 rounded-md p-3 sm:p-4">
+          <div className="w-full mb-4 flex items-center border border-white/70 rounded-md p-3 sm:p-4">
             <Lock className="text-white mr-3" size={20} />
             <input 
               type="password" 
@@ -90,13 +90,13 @@ function Login() {
           </div> 
 
           {/* Submit */}
-          <button type="submit" className="w-[60%] mt-4 py-3 sm:py-4 border cursor-pointer bg-[#36670F] text-white font-semibold rounded-full hover:bg-green-800 transition duration-200 text-base sm:text-lg my-4">
+          <button type="submit" className="w-[60%] mt-4 py-3 sm:py-4 border cursor-pointer bg-[#156c08] text-white font-semibold rounded-full hover:bg-green-800 transition duration-300 text-base sm:text-lg my-4 focus:ring-2 focus:ring-green-300 ">
             Login
           </button>
 
           {/* Forgot Password */}
           <div>   
-            <a href="#" className="text-blue-300 hover:text-blue-200 text-sm sm:text-base">Forgot Password?</a>
+            <a href="#" className="text-green-300 hover:text-green-200 text-sm sm:text-base">Forgot Password?</a>
           </div>
 
           {/* Register Link */}

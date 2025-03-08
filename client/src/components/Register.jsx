@@ -28,7 +28,7 @@ function Register() {
 
       setTimeout(() => {
         navigate("/landingPage");
-      }, 1000);
+      }, 500);
     } catch (error) {
       console.error("Registration failed:", error.response?.data || error.message);
       setMessage({ text: " Registration Failed. Try again.", type: "error" });
@@ -49,7 +49,7 @@ function Register() {
         {/* Register Form */}
         <form 
           onSubmit={handleSubmit} 
-          className="relative z-20 w-full md:w-[450px] lg:w-[500px] lg:h-[500px] max-w-[550px] max-h-[550px] min-h-[400px] bg-transparent border-2 border-white/50 rounded-3xl flex flex-col items-center text-blue-300 p-7 sm:p-10 justify-center backdrop-blur-2xl shadow-2xl shadow-black/50"
+          className="relative z-20 w-full md:w-[450px] lg:w-[500px] lg:h-[500px] max-w-[550px] max-h-[550px] min-h-[400px] bg-transparent border-2 border-white/50 rounded-3xl flex flex-col items-center text-green-300 md:px-20 p-6 justify-center backdrop-blur-2xl shadow-2xl shadow-black/50"
         >
 
           <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6">Register</h1>
@@ -62,7 +62,7 @@ function Register() {
           )}
 
           {/* Username Field */}
-          <div className="w-full mb-4 flex items-center border border-white/30 rounded-md p-3 sm:p-4">
+          <div className="w-full mb-4 flex items-center border border-white/70 rounded-md p-3 sm:p-4">
             <User className="text-white mr-3" size={20} />
             <input
               type="text"
@@ -76,7 +76,7 @@ function Register() {
           </div>
 
           {/* Email Field */}
-          <div className="w-full mb-4 flex items-center border border-white/30 rounded-md p-3 sm:p-4">
+          <div className="w-full mb-4 flex items-center border border-white/70 rounded-md p-3 sm:p-4">
             <Mail className="text-white mr-3" size={20} />
             <input
               type="email"
@@ -90,7 +90,7 @@ function Register() {
           </div>
 
           {/* Password Field */}
-          <div className="w-full mb-4 flex items-center border border-white/30 rounded-md p-3 sm:p-4">
+          <div className="w-full mb-4 flex items-center border border-white/70 rounded-md p-3 sm:p-4">
             <Lock className="text-white mr-3" size={20} />
             <input
               type="password"
@@ -106,7 +106,7 @@ function Register() {
           {/* Submit */}
           <button 
             type="submit" 
-            className="mt-6 w-[60%] py-3 sm:py-4 border bg-[#36670F] text-white font-semibold rounded-full hover:bg-green-800 transition duration-200 text-base sm:text-lg cursor-pointer"
+            className="mt-6 w-[60%] py-3 sm:py-4 border bg-[#156c08] text-white font-semibold rounded-full hover:bg-green-800 transition duration-300 text-base sm:text-lg cursor-pointer focus:ring-2 focus:ring-green-300"
           >
             Register
           </button>

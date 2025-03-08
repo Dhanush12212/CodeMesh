@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 import userModel from '../models/User.js';  
 
 //Registering an user 
-
 export const Register = async (req, res) => {
     let { username, email, password } = req.body;
 
@@ -91,14 +90,15 @@ export const Login = async (req, res) => {
     }
 };
 
-
+//Logout
 export const Logout = async (req, res) => { 
-    res.clearCookie("token", { 
-        httpOnly: true, 
-        secure: process.env.NODE_ENV === "production", 
+    res.cookie("token", "", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
         sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-    });
-
+        expires: new Date(0), // Expire the cookie
+      });
+      res.clearCookie("token"); 
     return res.status(200).json({ message: "Logout successful" });
 };
 

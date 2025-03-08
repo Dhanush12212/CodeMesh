@@ -1,6 +1,6 @@
-# CodeSync - A Live Collaborative Code Editor
+# CodeMesh - A Live Collaborative Code Editor
 
-CodeSync is a real-time, collaborative code editor designed for seamless pair programming, coding interviews, and team collaboration. With features like live code sharing, real-time cursor tracking, and voice/video chat integration, CodeSync makes remote coding sessions effortless.
+CodeMesh is a real-time, collaborative code editor designed for seamless pair programming, coding interviews, and team collaboration. With features like live code sharing, real-time cursor tracking, and voice/video chat integration, CodeMesh makes remote coding sessions effortless.
 
 ## Features
 
@@ -76,7 +76,7 @@ CodeSync is a real-time, collaborative code editor designed for seamless pair pr
 
 ## 6. Access the Application
 
-   - Open `http://localhost:5173` in your browser to start using CodeSync.
+   - Open `http://localhost:5173` in your browser to start using CodeMesh.
 
 # Contributing
 
