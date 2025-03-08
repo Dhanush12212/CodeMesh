@@ -112,8 +112,7 @@ function LandingPage() {
             </button>
           </div> 
         </form>
-        }
-        
+        } 
       </div>
     </div>
     </> 
