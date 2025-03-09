@@ -1,3 +1,3 @@
-export const Editor = async(req, res) => {
+export const getCode = async(req, res) => {
 
 };

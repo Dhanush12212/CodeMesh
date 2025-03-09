@@ -4,14 +4,11 @@ import axios from 'axios';
 import API_URL from '../../config.js';
 import { useNavigate } from 'react-router-dom';
 
-function LandingPage() {
-  
+function LandingPage() { 
 
   const [code, setCode] = useState("");
   const [showInput, setShowInput] = useState(false)
-  const navigate = useNavigate();
- 
-  
+  const navigate = useNavigate(); 
   
   const handleJoinRoom = () => setShowInput(true);
 
@@ -20,7 +17,7 @@ function LandingPage() {
     
     if (!code.trim()) return;
     try {
-      const response = await axios.post(`${API_URL}/Code/landingPage`,
+      const response = await axios.post(`${API_URL}/Code/Home`,
         {code},
         {withCredentials: true},
       );
@@ -43,8 +40,7 @@ function LandingPage() {
 
     }
   }
-
-
+ 
   return (
     <> 
     {/* Logout button */}
@@ -64,7 +60,7 @@ function LandingPage() {
         className="absolute w-full h-full object-cover brightness-50" 
         src={assets.LandingBackground} 
         alt="Background" 
-      /> 
+      />
 
       {/* Content Wrapper */}
       <div className="absolute flex flex-col py-20 sm:py-40 items-center text-center gap-8 bg-white/10 backdrop-blur-xl p-8 sm:p-12 rounded-3xl shadow-xl border border-white/20">
@@ -75,7 +71,7 @@ function LandingPage() {
             Code Together, Anywhere, Anytime!
           </h1>
 
-          <p className="desc text-lg sm:text-2xl font-medium sm:font-semibold text-gray-200 opacity-90 drop-shadow-md text-center leading-relaxed">
+          <p className="desc sm:text-2xl font-medium sm:font-semibold text-gray-200 opacity-90 drop-shadow-md text-center leading-relaxed">
             Collaborate in real-time with <span className="text-blue-400">seamless coding</span> & <span className="text-purple-400">instant updates</span>.
           </p>
         </div>

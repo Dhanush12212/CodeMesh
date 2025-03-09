@@ -4,6 +4,6 @@ import {Editor} from '../controller/EditorController.js';
 
 const router = express.Router();
 
-router.post('/landingPage', authMiddleware, Editor); 
+router.post('/Home', authMiddleware, getCode); 
 
 export default router;

@@ -27,7 +27,7 @@ function Login() {
       setMessage({ text: "🎉 Login Successful!", type: "success" });
  
       setTimeout(() => {
-        navigate("/landingPage");
+        navigate("/Home");
       }, 500);
     } catch (error) {
       console.error("Login failed:", error.response?.data || error.message);
@@ -64,7 +64,7 @@ function Login() {
           )}
 
           {/* Email */}
-          <div className="w-full mb-4 flex items-center border border-white/70 rounded-md p-3 sm:p-4">
+          <div className="w-full mb-4 flex items-center border-2 rounded-md p-3 sm:p-4">
             <Mail className="text-white mr-3" size={20} />
             <input 
               type="text" 
@@ -77,7 +77,7 @@ function Login() {
           </div>
           
           {/* Password */}
-          <div className="w-full mb-4 flex items-center border border-white/70 rounded-md p-3 sm:p-4">
+          <div className="w-full mb-4 flex items-center border border-2 rounded-md p-3 sm:p-4">
             <Lock className="text-white mr-3" size={20} />
             <input 
               type="password" 
