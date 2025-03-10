@@ -1,20 +1,68 @@
 export const LANGUAGE_VERSION = { 
-        "Python": "3.13.2",
+        "Python": "3.13.0",
         "JavaScript": "18.15.0",
-        "Java": "20.12.2",
-        "C": "12.1.1",
-        "CPP": "18.8.2",
-        "CSharp": "13.5.2",
-        "PHP": "8.2.3",  
-}
-
-export const CODE_SNIPPETS = {
-        Python: `def greet(name):\n\tprint("Hello, " + name + "!")\n\ngreet("Alex")\n`,
-        C: `#include <stdio.h>\n\nvoid greet(char name[]) {\n\tprintf("Hello, %s!\\n", name);\n}\n\nint main() {\n\tgreet("Alex");\n\treturn 0;\n}`,
-        CPP: `#include <iostream>\nusing namespace std;\n\nvoid greet(string name) {\n\tcout << "Hello, " << name << "!" << endl;\n}\n\nint main() {\n\tgreet("Alex");\n\treturn 0;\n}`,
-        JavaScript: `function greet(name) {\n\tconsole.log("Hello, " + name + "!");\n}\n\ngreet("Alex");\n`,
-        Java: `public class HelloWorld {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println("Hello, Alex!");\n\t}\n}`,
-        CSharp: `using System;\n\nnamespace HelloWorld\n{\n\tclass Program {\n\t\tstatic void Main(string[] args) {\n\t\t\tConsole.WriteLine("Hello, Alex!");\n\t\t}\n\t}\n}`,
-        PHP: `<?php\n$name = "Alex";\necho "Hello, " . $name . "!";\n?>`
-};
-      
+        "Java": "21.0.2",   
+        "C": "2.0",
+        "C++": "23",       
+        "C#": "12.0",     
+        "PHP": "8.3.0"
+    };
+    
+    export const CODE_SNIPPETS = {
+        Python: `def greet(name):
+        print("Hello, " + name + "!")
+        
+    greet("Alex")`,
+    
+        C: `#include <stdio.h>
+    
+    void greet(char name[]) {
+        printf("Hello, %s!\\n", name);
+    }
+    
+    int main() {
+        greet("Alex");
+        return 0;
+    }`,
+    
+        "C++": `#include <iostream>
+    using namespace std;
+    
+    void greet(string name) {
+        cout << "Hello, " << name << "!" << endl;
+    }
+    
+    int main() {
+        greet("Alex");
+        return 0;
+    }`,
+    
+        JavaScript: `function greet(name) {
+        console.log("Hello, " + name + "!");
+    }
+    
+    greet("Alex");`,
+    
+        Java: `public class Greet {
+        public static void main(String[] args) {
+            System.out.println("Hello, Alex!");
+        }
+    }`,
+    
+        "C#": `using System;
+    
+    namespace HelloWorld
+    {
+        class Program {
+            static void Main(string[] args) {
+                Console.WriteLine("Hello, Alex!");
+            }
+        }
+    }`,
+    
+        PHP: `<?php
+    $name = "Alex";
+    echo "Hello, " . $name . "!";
+    ?>`
+    };
+    

@@ -2,6 +2,7 @@ import { Box, MenuButton, MenuList, Menu, MenuItem, Text, Button } from '@chakra
 import { ChevronDownIcon } from 'lucide-react'
 import React from 'react' 
 import { LANGUAGE_VERSION } from '../constants';
+import { color } from 'framer-motion';
 
 const languages = Object.entries( LANGUAGE_VERSION );
 
@@ -13,13 +14,29 @@ function LanguageSelector({language,onSelect}) {
         <MenuButton as={Button} rightIcon={<ChevronDownIcon/>}>
           {language}
         </MenuButton>
-        <MenuList>
+        <MenuList fontSize='lg' fontWeight='semibold'>
           {
-            languages.map(([language, version]) => (
-              <MenuItem key={language} onClick={()=>onSelect(language)}> {language} 
+            languages.map(([lang, version]) => (
+              <MenuItem 
+                key={lang} 
+                onClick={()=>onSelect(lang)}
+                color={
+                  lang === language ? "blue.400" : ""
+                }
+                bg={
+                  lang === language ? "grey.900" : "transparent"
+                }
+                _hover={{
+                  color: "blue.400",
+                  bg: "grey.900"
+                }}
+              > 
+
+              {lang} 
                 &nbsp;
                 &nbsp;
-                <Text key={version} > {version} </Text>
+              <Text key={version} > ({version}) </Text>
+
               </MenuItem>
             )) 
           }
