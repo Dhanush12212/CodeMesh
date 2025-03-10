@@ -2,20 +2,23 @@ import { Box } from '@chakra-ui/react'
 import { Editor } from '@monaco-editor/react'
 import React,{useState, useRef} from 'react' 
 import LanguageSelector from './LanguageSelector';
+import { CODE_SNIPPETS } from '../constants';
 
 function CodeEditor() {
 
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(CODE_SNIPPETS["JavaScript"]);
   const [language, setLanguage] = useState('JavaScript')
   const editorRef = useRef(null);
 
+  //Focus on the Editor
   const handleOnMount = (editor) => {
-    editor.current = editor;
+    editorRef.current = editor;
     editor.focus();
   }
 
   const onSelect = (language) => {
     setLanguage(language);
+    setValue(CODE_SNIPPETS[language])
   }
 
   return (
@@ -24,11 +27,10 @@ function CodeEditor() {
       <Editor 
         height="90vh" 
         theme='vs-dark'  
-        value={value}
-        ref={editorRef}
+        value={value} 
+        language={language}
         onMount={handleOnMount}
-        onChange={(value,event) =>setValue(value)}  
-        defaultValue="// some comment" 
+        onChange={(value) =>setValue(value)}  
       />
     </Box>
   )
