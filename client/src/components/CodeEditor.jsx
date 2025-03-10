@@ -45,4 +45,4 @@ function CodeEditor() {
   )
 }
 
-export default CodeEditor
+export default CodeEditor;

@@ -1,8 +1,7 @@
 import { Box, MenuButton, MenuList, Menu, MenuItem, Text, Button } from '@chakra-ui/react' 
 import { ChevronDownIcon } from 'lucide-react'
 import React from 'react' 
-import { LANGUAGE_VERSION } from '../constants';
-import { color } from 'framer-motion';
+import { LANGUAGE_VERSION } from '../constants'; 
 
 const languages = Object.entries( LANGUAGE_VERSION );
 
