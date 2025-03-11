@@ -27,7 +27,7 @@ function Login() {
       setMessage({ text: "🎉 Login Successful!", type: "success" });
  
       setTimeout(() => {
-        navigate("/Home");
+        navigate("/");
       }, 500);
     } catch (error) {
       console.error("Login failed:", error.response?.data || error.message);
@@ -41,7 +41,7 @@ function Login() {
     <>  
       <div className="w-full h-screen relative flex flex-col items-center justify-center px-4 sm:px-0">
         {/* Background Image */}
-        <img className="absolute w-full h-full object-cover brightness-60" src={assets.LoginBackground} alt="Background" /> 
+        <img className="absolute w-full h-full object-cover brightness-40" src={assets.LoginBackground} alt="Background" /> 
 
         {/* Navbar */}
         {/* <div className="absolute top-0 left-0 w-full z-10">

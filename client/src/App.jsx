@@ -10,11 +10,10 @@ function App() {
     <>
     
     <Router>
-      <Routes>
-        <Route path='/' element={<Login/>} />
+      <Routes> 
+        <Route path='/' element={<LandingPage/>} />
         <Route path='/login' element={<Login/>} />
         <Route path='/register' element={<Register/>} />
-        <Route path='/landingPage' element={<LandingPage/>} />
         <Route path='/CodeMesh' element={<MainPage/>} />
       </Routes>
     </Router>
