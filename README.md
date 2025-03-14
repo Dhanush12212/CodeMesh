@@ -1,15 +1,13 @@
 # CodeMesh - A Live Collaborative Code Editor
 
-CodeMesh is a real-time, collaborative code editor designed for seamless pair programming, coding interviews, and team collaboration. With features like live code sharing, real-time cursor tracking, and voice/video chat integration, CodeMesh makes remote coding sessions effortless.
+CodeMesh is a real-time, collaborative code editor designed for seamless pair programming, coding interviews, and team collaboration. With features like live code sharing and Code execution. CodeMesh makes remote coding sessions effortless.
 
 ## Features
 
-- **Real-time Collaboration**: Instantly sync code across multiple users.
-- **Live Cursor Tracking**: See where your teammates are editing.
+- **Real-time Collaboration**: Instantly sync code across multiple users. 
 - **Rich Code Editing**: Powered by Monaco Editor.
 - **Room-Based Collaboration**: Join or create coding rooms for focused teamwork. 
-- **User Authentication**: Secure login and registration using JWT.
-- **Dark & Light Mode**: Customize your coding environment.
+- **User Authentication**: Secure login and registration using JWT. 
 
 # Tech Stack
 

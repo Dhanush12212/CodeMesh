@@ -3,45 +3,78 @@ dotenv.config();
 
 import express from 'express'; 
 import AuthRoute from './routes/AuthRoute.js';
-import EditorRoute from './routes/EditorRoute.js';
+import EditorRoute from './routes/CodeEditorController.js';
 import cookieParser from 'cookie-parser';
 import connectDB from './db/connectDB.js';
-import cors from 'cors'
+import cors from 'cors';
+import http from 'http';
+import { Server } from 'socket.io';
 
 const app = express();
-
 const PORT = process.env.PORT || 8000;
 
+// Create HTTP Server for WebSockets
+const httpServer = http.createServer(app);
+const io = new Server(httpServer, {
+    cors: {
+        origin: 'http://localhost:5173',
+        credentials: true,
+    }
+});
+
+// Middleware
 app.use(express.json());
-app.use(cookieParser())
+app.use(cookieParser());
 app.use(cors({
-    origin: [ 
-        'http://localhost:5173', 
-    ],
-    credentials:true,
+    origin: 'http://localhost:5173',
+    credentials: true,
 }));
 
 // Routes
-app.use('/api/Auth',AuthRoute);
+app.use('/api/Auth', AuthRoute);
 app.use('/api/Code', EditorRoute);
 
-const startServer = async() => {
+// Initialize global code state
+let code = ''; // ✅ Fix: Define a global code variable
+let selectedLanguage = 'javascript';
+let currentLanguage = selectedLanguage;
+
+// Socket Connection Handling
+io.on('connection', (socket) => {
+    console.log(`User Connected: ${socket.id}`);
+
+    // Send the latest code to the newly connected user
+    socket.emit('updatedCode', code);
+
+    // Send the current language to the newly connected user
+    socket.emit('languageChange', selectedLanguage);
+    // Listen for language changes from a user
+    socket.on('languageChange', (selectedLanguage) => {
+        currentLanguage = selectedLanguage; // ✅ Update language globally
+        io.emit('languageChange', selectedLanguage); // ✅ Broadcast to all users
+    });
+
+    // Handle incoming code updates
+    socket.on('updatedCode', (newCode) => {
+        code = newCode; // Update global state
+        socket.broadcast.emit('updatedCode', newCode);
+    });
+
+    socket.on('disconnect', () => {
+        console.log(`User Disconnected: ${socket.id}`);
+    });
+});
+
+// Start Server
+const startServer = async () => {
     try {
         await connectDB();
-        app.listen(PORT, '0.0.0.0', () => {
-            console.log(
-                JSON.stringify({message: `Server connected on port ${PORT}`, status: "Success"})
-            );
+        httpServer.listen(PORT, '0.0.0.0', () => {
+            console.log(`Server running on port ${PORT}`);
         });
-    } catch(error) {
-        console.error(
-            JSON.stringify({ 
-                message: "Failed to start server", 
-                status:"Failed", 
-                error:error.message
-            })
-        );
-        process.exit(1); 
+    } catch (error) {
+        console.error(`Server failed: ${error.message}`);
+        process.exit(1);
     }
 };
 

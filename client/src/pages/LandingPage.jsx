@@ -65,6 +65,7 @@ function LandingPage() {
         </Link>
       )}
 
+      {/* Container */}
       <div className="absolute flex flex-col py-20 sm:py-40 items-center text-center gap-8 bg-white/10 backdrop-blur-xl p-8 sm:p-12 rounded-3xl shadow-xl border border-white/20">
         <div className="flex flex-col gap-4 text-white">
           <h1 className="Text lg:text-5xl md:text-5xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-green-800 drop-shadow-lg text-center tracking-tight">
@@ -89,15 +90,15 @@ function LandingPage() {
           </button>
         </div>
         {showInput && (
-          <form onSubmit={enteredCode} className="flex flex-col items-center w-full gap-4">
+          <form onSubmit={enteredCode} className="flex mt-3 items-center gap-4">
             <input 
               type="text" 
               name='code'
               placeholder="Enter Room Code"
-              className='border-b-2 outline-none text-white text-center px-4 py-1 lg:text-xl md:text-lg w-full rounded-md shadow-md focus:ring-2 focus:ring-green-400'
+              className='border-b-2 outline-none text-white text-center px-4 py-2 lg:text-xl md:text-lg w-full rounded-md shadow-md focus:ring-2 focus:ring-green-600'
               onChange={(e) => setCode(e.target.value)}
             />
-            <button type="submit" className="mt-2 px-3 py-3 w-28 bg-green-700 text-white rounded-lg hover:bg-green-600">
+            <button type="submit" className="px-4 py-3 w-28 bg-green-700 text-white rounded-lg hover:bg-green-600">
               Join
             </button>
           </form>
