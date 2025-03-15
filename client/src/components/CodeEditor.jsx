@@ -6,66 +6,51 @@ import { CODE_SNIPPETS } from '../constants';
 import Output from './Output';
 import { socket } from '../socket/socket';
 
-function CodeEditor() {
+function CodeEditor({ roomId }) {
   const [language, setLanguage] = useState('javascript');
   const [value, setValue] = useState(CODE_SNIPPETS['javascript']);
   const editorRef = useRef(null);
 
-  // Focus on the Editor
-  const handleOnMount = (editor) => {
-    editorRef.current = editor;
-    editor.focus();
-  };
+  useEffect(() => {
+    socket.connect();
+    socket.emit('joinRoom', roomId);
+
+    socket.on('languageChange', ({ roomId: updatedRoomId, language }) => {
+      if (updatedRoomId === roomId) {
+        setLanguage(language);
+        setValue(CODE_SNIPPETS[language]);
+        console.log(`🔹 Language updated in room ${roomId}: ${language}`);
+      }
+    });
+
+    socket.on('updatedCode', ({ roomId: updatedRoomId, code }) => {
+      if (updatedRoomId === roomId && code !== value) {
+        console.log(`✏️ Code updated in room ${roomId}: ${code.length} chars`);
+        setValue(code);
+      }
+    });
+
+    return () => {
+      socket.off('languageChange');
+      socket.off('updatedCode');
+    };
+  }, [roomId]);
 
   const onSelect = (selectedLanguage) => {
     setLanguage(selectedLanguage);
     setValue(CODE_SNIPPETS[selectedLanguage]);
-    socket.emit('languageChange', selectedLanguage); 
+    socket.emit('languageChange', { roomId, selectedLanguage });
   };
-
-  useEffect(() => {
-    socket.on('connect', () => {
-      console.log(`Connected: ${socket.id}`);
-    });
-
-    socket.on('languageChange', (selectedLanguage) => {
-      setLanguage(selectedLanguage);
-      setValue(CODE_SNIPPETS[selectedLanguage]);
-      console.log(`Language changed to: ${selectedLanguage}`);
-    });
-
-    socket.on('updatedCode', (newCode) => {
-      if (newCode !== value) {
-        setValue(newCode);
-      }
-    });
-
-    socket.on('disconnect', () => {
-      console.log(`Disconnected: ${socket.id}`);
-    });
-
-    return () => {
-      socket.off('connect');
-      socket.off('languageChange');
-      socket.off('updatedCode');
-      socket.off('disconnect');
-    };
-  }, []); // ✅ Empty dependency array to run once
 
   const handleOnChange = (newCode) => {
     setValue(newCode);
-    socket.emit('updatedCode', newCode);
+    socket.emit('updatedCode', { roomId, newCode });
   };
 
   return (
     <Box width="100%">
-      <HStack 
-        spacing={4} 
-        display={["block", "flex"]}  // Block on small screens, flex on md and larger
-        flexDirection={["column", "row"]}
-        alignItems="stretch" // Ensure both children stretch properly
-      >
-        <Box width={["100%", "50%"]} mt={3}>  {/* 100% on mobile, 50% on larger screens */}
+      <HStack spacing={4} flexDirection={["column", "column", "row"]} alignItems="stretch">
+        <Box width={["100%", "100%", "50%"]} mt={3}>  
           <LanguageSelector language={language} onSelect={onSelect} />
           <Editor
             options={{ minimap: { enabled: false } }}
@@ -73,17 +58,19 @@ function CodeEditor() {
             theme="vs-dark"
             value={value}
             language={language}
-            onMount={handleOnMount}
+            onMount={(editor) => {
+              editorRef.current = editor;
+              editor.focus();
+            }}
             onChange={handleOnChange}
           />
         </Box>
-        <Box width={["100%", "50%"]}> {/* Ensure Output box also adapts */}
+        <Box width={["100%", "100%", "50%"]}>  
           <Output editorRef={editorRef} language={language} />
         </Box>
       </HStack>
     </Box>
-  );
-  
+  ); 
 }
 
 export default CodeEditor;

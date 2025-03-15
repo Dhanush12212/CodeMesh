@@ -14,7 +14,7 @@ return (
         <Route path='/' element={<LandingPage/>} />
         <Route path='/login' element={<Login/>} />
         <Route path='/register' element={<Register/>} />
-        <Route path='/CodeMesh' element={<Home/>} />
+        <Route path='/CodeMesh/:roomId' element={<Home/>} />
       </Routes>
     </Router>
 

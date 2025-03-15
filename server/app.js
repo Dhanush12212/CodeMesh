@@ -3,17 +3,16 @@ dotenv.config();
 
 import express from 'express'; 
 import AuthRoute from './routes/AuthRoute.js';
-import EditorRoute from './routes/CodeEditorController.js';
+import EditorRoute from './routes/CodeEditorRoute.js';
 import cookieParser from 'cookie-parser';
 import connectDB from './db/connectDB.js';
 import cors from 'cors';
 import http from 'http';
-import { Server } from 'socket.io';
+import { Server } from 'socket.io'; 
 
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-// Create HTTP Server for WebSockets
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
     cors: {
@@ -22,7 +21,6 @@ const io = new Server(httpServer, {
     }
 });
 
-// Middleware
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
@@ -33,31 +31,42 @@ app.use(cors({
 // Routes
 app.use('/api/Auth', AuthRoute);
 app.use('/api/Code', EditorRoute);
-
-// Initialize global code state
-let code = ''; // ✅ Fix: Define a global code variable
-let selectedLanguage = 'javascript';
-let currentLanguage = selectedLanguage;
+ 
+const rooms = new Map(); // Stores { roomId: { code, language } }
 
 // Socket Connection Handling
 io.on('connection', (socket) => {
     console.log(`User Connected: ${socket.id}`);
 
-    // Send the latest code to the newly connected user
-    socket.emit('updatedCode', code);
+    socket.on('joinRoom', (roomId) => {
+        socket.join(roomId);
+        
+        if (!rooms.has(roomId)) {
+            rooms.set(roomId, { code: '', language: 'javascript' }); // Initialize room
+        }
 
-    // Send the current language to the newly connected user
-    socket.emit('languageChange', selectedLanguage);
-    // Listen for language changes from a user
-    socket.on('languageChange', (selectedLanguage) => {
-        currentLanguage = selectedLanguage; // ✅ Update language globally
-        io.emit('languageChange', selectedLanguage); // ✅ Broadcast to all users
+        const { code, language } = rooms.get(roomId);
+
+        console.log(`User ${socket.id} joined room: ${roomId}`);
+        io.to(socket.id).emit('roomJoined', { roomId, message: `Joined room: ${roomId}` });
+        io.to(socket.id).emit('updatedCode', { roomId, code });
+        io.to(socket.id).emit('languageChange', { roomId, language });
     });
 
-    // Handle incoming code updates
-    socket.on('updatedCode', (newCode) => {
-        code = newCode; // Update global state
-        socket.broadcast.emit('updatedCode', newCode);
+    // Listen for language change
+    socket.on('languageChange', ({ roomId, selectedLanguage }) => {
+        if (rooms.has(roomId)) {
+            rooms.get(roomId).language = selectedLanguage;
+            io.to(roomId).emit('languageChange', { roomId, language: selectedLanguage });
+        }
+    });
+
+    // Listen for code updates
+    socket.on('updatedCode', ({ roomId, newCode }) => {
+        if (rooms.has(roomId)) {
+            rooms.get(roomId).code = newCode;
+            socket.to(roomId).emit('updatedCode', { roomId, code: newCode });
+        }
     });
 
     socket.on('disconnect', () => {

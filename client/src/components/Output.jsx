@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Box, Button, Text, useToast } from "@chakra-ui/react";
 import { executeCode } from "../api";
+import {socket} from '../socket/socket';
 
 const Output = ({ editorRef, language }) => {
   const toast = useToast();
@@ -30,7 +31,7 @@ const Output = ({ editorRef, language }) => {
   };
 
   return (
-    <Box w="50%">
+    <Box >
       <Text mb={2} fontSize="lg">
         Output
       </Text>

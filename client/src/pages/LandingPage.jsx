@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import API_URL from '../../config.js';
 import { useNavigate, Link } from 'react-router-dom';
+import { socket } from '../socket/socket.js';
 
 function LandingPage() {
-  const [code, setCode] = useState("");
-  const [showInput, setShowInput] = useState(false);
+  const [roomId, setRoomId] = useState("");
   const [isLogin, setIsLogin] = useState(false);
+  const [joinedRoom, setJoinedRoom] = useState("");
+
   const navigate = useNavigate();
 
   useEffect(() => { 
@@ -19,21 +21,48 @@ function LandingPage() {
       }
     };
     checkLoginStatus();
-  }, []);  
+  }, []);
 
-  const handleJoinRoom = () => setShowInput(true);
+  useEffect(() => {
+    socket.on('connect', () => {
+      console.log(`Connected: ${socket.id}`);
+    }); 
 
-  const enteredCode = async (e) => {
-    e.preventDefault();
-    if (!code.trim()) return;
-    try {
-      const response = await axios.post(`${API_URL}/Code/Home`, { code }, { withCredentials: true });
-      console.log("Successfully received Code: ", response.data);
-      navigate('/CodeMesh');
-    } catch (error) {
-      console.error("Failed to receive code: ", error.message);
+    socket.on('roomJoined', ({ roomId, message }) => {
+      console.log(message);
+      setJoinedRoom(roomId);
+      navigate(`/CodeMesh/${roomId}`);
+    });
+
+    socket.on('error', (error) => {
+      alert(error.message); // Show error messages
+    });
+
+    return () => {
+      socket.off('connect');
+      socket.off('roomJoined');
+      socket.off('error');
+    };
+  }, [navigate]);
+
+  const handleJoinRoom = () => { 
+    if (!roomId.trim()) {
+      alert("Please enter a valid Room ID.");
+      return;
     }
+    console.log("Joining room:", roomId); // Debugging log
+    socket.emit('joinRoom', roomId);
+  }; 
+
+  const handleCreateRoom = () => {
+    if (!roomId.trim()) {
+      alert("Please enter a Room ID to create.");
+      return;
+    }
+    
+    socket.emit('joinRoom', roomId); // Instead of 'createRoom', just use 'joinRoom'
   };
+  
 
   const handleLogout = async () => {
     try {
@@ -75,10 +104,11 @@ function LandingPage() {
             Collaborate in real-time with <span className="text-blue-400">seamless coding</span> & <span className="text-purple-400">instant updates</span>.
           </p>
         </div>
+
         <div className="flex gap-6">
           <button 
             className="Button px-6 sm:px-8 py-3 sm:py-4 text-lg font-semibold text-white bg-blue-700 rounded-xl shadow-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-300 transition-all duration-300 cursor-pointer"
-            onClick={handleJoinRoom}
+            onClick={handleCreateRoom}
           >
             Create Room
           </button>
@@ -88,21 +118,18 @@ function LandingPage() {
           >
             Join Room
           </button>
-        </div>
-        {showInput && (
-          <form onSubmit={enteredCode} className="flex mt-3 items-center gap-4">
-            <input 
-              type="text" 
-              name='code'
-              placeholder="Enter Room Code"
-              className='border-b-2 outline-none text-white text-center px-4 py-2 lg:text-xl md:text-lg w-full rounded-md shadow-md focus:ring-2 focus:ring-green-600'
-              onChange={(e) => setCode(e.target.value)}
-            />
-            <button type="submit" className="px-4 py-3 w-28 bg-green-700 text-white rounded-lg hover:bg-green-600">
-              Join
-            </button>
-          </form>
-        )}
+        </div> 
+
+        <div className="flex mt-3 items-center gap-4">
+          <input 
+            type="text" 
+            name='code'
+            placeholder="Enter Room Code"
+            className='border-b-2 outline-none text-white text-center px-4 py-2 lg:text-xl md:text-lg w-full rounded-md shadow-md focus:ring-2 focus:ring-green-600'
+            value={roomId}
+            onChange={(e) => setRoomId(e.target.value)} 
+          />
+        </div> 
       </div>
     </div>
   );
