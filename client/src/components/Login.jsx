@@ -51,7 +51,7 @@ function Login() {
         {/* Login Form */}
         <form 
             onSubmit={handleSubmit} 
-            className="relative z-20 w-full md:w-[450px] lg:w-[500px] lg:h-[500px] min-h-[380px] md:h-[450px] sm:h-[400px] bg-transparent border-2 border-white/50 rounded-3xl flex flex-col items-center text-green-300 p-6 md:px-20  justify-center backdrop-blur-2xl shadow-xl shadow-black/50"
+            className="relative z-20 w-full md:w-[450px] lg:w-[500px] lg:h-[500px] min-h-[380px] md:h-[450px] sm:h-[400px] bg-transparent border border-white/50 rounded-3xl flex flex-col items-center text-green-300 p-6 md:px-20  justify-center backdrop-blur-2xl shadow-xl shadow-black/50"
         >
 
           <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6">Login</h1>
@@ -64,7 +64,7 @@ function Login() {
           )}
 
           {/* Email */}
-          <div className="w-full mb-4 flex items-center border-2 rounded-md p-3 sm:p-4">
+          <div className="w-full mb-4 flex items-center border rounded-md p-3 sm:p-4">
             <Mail className="text-white mr-3" size={20} />
             <input 
               type="text" 
@@ -77,7 +77,7 @@ function Login() {
           </div>
           
           {/* Password */}
-          <div className="w-full mb-4 flex items-center border border-2 rounded-md p-3 sm:p-4">
+          <div className="w-full mb-4 flex items-center border rounded-md p-3 sm:p-4">
             <Lock className="text-white mr-3" size={20} />
             <input 
               type="password" 

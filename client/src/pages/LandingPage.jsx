@@ -125,7 +125,7 @@ function LandingPage() {
             type="text" 
             name='code'
             placeholder="Enter Room Code"
-            className='border-b-2 outline-none text-white text-center px-4 py-2 lg:text-xl md:text-lg w-full rounded-md shadow-md focus:ring-2 focus:ring-green-600'
+            className='border-b outline-none text-white text-center px-4 py-2 lg:text-xl md:text-lg w-full rounded-md shadow-md focus:ring-2 focus:ring-green-600'
             value={roomId}
             onChange={(e) => setRoomId(e.target.value)} 
           />
