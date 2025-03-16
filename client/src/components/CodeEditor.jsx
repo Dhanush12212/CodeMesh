@@ -1,4 +1,4 @@
-import { Box, HStack } from '@chakra-ui/react';
+import { Box, Stack } from '@chakra-ui/react';
 import { Editor } from '@monaco-editor/react';
 import React, { useState, useRef, useEffect } from 'react';
 import LanguageSelector from './LanguageSelector';
@@ -54,12 +54,22 @@ function CodeEditor({ roomId }) {
 
   return (
     <Box width="100%">
-      <HStack spacing={4} flexDirection={["column", "column", "row"]} alignItems="stretch">
-        <Box width={["100%", "100%", "50%"]} mt={3}>  
-          <LanguageSelector language={language} onSelect={onSelect} />
+      {/* Stack handles responsive layout */}
+      <Stack
+        direction={{ base: "column", md: "row" }}
+        spacing={4}
+        align="stretch"
+      >
+        <Box 
+          width={{base:"100%", md:"100%", lg:"50%"}} 
+          mt={3}
+          mb={20}
+          height={{base:"60vh", md:"70vh", lg:"80vh"}} 
+        >
+          <LanguageSelector language={language} onSelect={onSelect}  />
           <Editor
             options={{ minimap: { enabled: false } }}
-            height="80vh"
+            height="100%" 
             theme="vs-dark"
             value={value}
             language={language}
@@ -67,12 +77,15 @@ function CodeEditor({ roomId }) {
             onChange={handleOnChange}
           />
         </Box>
-        <Box width={["100%", "100%", "50%"]}>  
+        <Box 
+          width={{base:"100%", md:"100%", lg:"50%"}} 
+          height={{base:"60vh", md:"70vh", lg: "80vh"}} 
+        >
           <Output editorRef={editorRef} language={language} />
         </Box>
-      </HStack>
+      </Stack>
     </Box>
-  ); 
+  );
 }
 
 export default CodeEditor;

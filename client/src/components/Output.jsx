@@ -45,7 +45,7 @@ const Output = ({ editorRef, language }) => {
         Run Code
       </Button>
       <Box
-        height="80vh"
+         height={{base:"60vh", md:"70vh", lg: "80vh"}} 
         p={2}
         color={isError ? "red.400" : ""}
         border="1px solid"
