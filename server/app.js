@@ -28,11 +28,11 @@ app.use(cors({
     credentials: true,
 }));
 
-// Routes
+
 app.use('/api/Auth', AuthRoute);
 app.use('/api/Code', EditorRoute);
  
-const rooms = new Map(); // Stores { roomId: { code, language } }
+const rooms = new Map(); 
 
 // Socket Connection Handling
 io.on('connection', (socket) => {
@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
         socket.join(roomId);
         
         if (!rooms.has(roomId)) {
-            rooms.set(roomId, { code: '', language: 'javascript' }); // Initialize room
+            rooms.set(roomId, { code: '', language: 'javascript' });
         }
 
         const { code, language } = rooms.get(roomId);

@@ -35,7 +35,7 @@ function LandingPage() {
     });
 
     socket.on('error', (error) => {
-      alert(error.message); // Show error messages
+      alert(error.message);  
     });
 
     return () => {
@@ -50,7 +50,7 @@ function LandingPage() {
       alert("Please enter a valid Room ID.");
       return;
     }
-    console.log("Joining room:", roomId); // Debugging log
+    console.log("Joining room:", roomId); 
     socket.emit('joinRoom', roomId);
   }; 
 
@@ -60,7 +60,7 @@ function LandingPage() {
       return;
     }
     
-    socket.emit('joinRoom', roomId); // Instead of 'createRoom', just use 'joinRoom'
+    socket.emit('joinRoom', roomId); 
   };
   
 

@@ -19,13 +19,13 @@ function CodeEditor({ roomId }) {
       if (updatedRoomId === roomId) {
         setLanguage(language);
         setValue(CODE_SNIPPETS[language]);
-        console.log(`🔹 Language updated in room ${roomId}: ${language}`);
+        console.log(`Language updated in room ${roomId}: ${language}`);
       }
     });
 
     socket.on('updatedCode', ({ roomId: updatedRoomId, code }) => {
       if (updatedRoomId === roomId && code !== value) {
-        console.log(`✏️ Code updated in room ${roomId}: ${code.length} chars`);
+        console.log(`Code updated in room ${roomId}: ${code.length} chars`);
         setValue(code);
       }
     });
@@ -47,6 +47,11 @@ function CodeEditor({ roomId }) {
     socket.emit('updatedCode', { roomId, newCode });
   };
 
+  const onMount = (editor) => {
+    editorRef.current = editor;
+    editor.focus();
+  }
+
   return (
     <Box width="100%">
       <HStack spacing={4} flexDirection={["column", "column", "row"]} alignItems="stretch">
@@ -58,10 +63,7 @@ function CodeEditor({ roomId }) {
             theme="vs-dark"
             value={value}
             language={language}
-            onMount={(editor) => {
-              editorRef.current = editor;
-              editor.focus();
-            }}
+            onMount={onMount}
             onChange={handleOnChange}
           />
         </Box>
