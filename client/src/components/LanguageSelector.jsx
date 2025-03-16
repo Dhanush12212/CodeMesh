@@ -23,11 +23,11 @@ function LanguageSelector({language,onSelect}) {
                   lang === language ? "blue.400" : ""
                 }
                 bg={
-                   "grey.900"  
+                  lang === language ? "gray.900" : "transparent"
                 }
                 _hover={{
                   color: "blue.400",
-                  bg: "grey.900"
+                  bg: "gray.900"
                 }}
               > 
 
