@@ -8,12 +8,12 @@ const languages = Object.entries( LANGUAGE_VERSIONS );
 function LanguageSelector({language,onSelect}) {
   return (
     <Box>  
-      <Text mb={2} fontSize='lg'>Languages: </Text>
+      <Text mb={2} fontSize={['md','lg']}>Languages: </Text>
       <Menu> 
         <MenuButton as={Button} rightIcon={<ChevronDownIcon/>}>
           {language}
         </MenuButton>
-        <MenuList fontSize='lg' fontWeight='semibold'>
+        <MenuList fontSize={['sm','md','lg']} fontWeight='semibold'>
           {
             languages.map(([lang, version]) => (
               <MenuItem 
@@ -23,7 +23,7 @@ function LanguageSelector({language,onSelect}) {
                   lang === language ? "blue.400" : ""
                 }
                 bg={
-                  lang === language ? "grey.900" : "transparent"
+                   "grey.900"  
                 }
                 _hover={{
                   color: "blue.400",

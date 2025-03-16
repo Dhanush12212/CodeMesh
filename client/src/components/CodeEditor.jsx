@@ -79,7 +79,7 @@ function CodeEditor({ roomId }) {
         </Box>
         <Box 
           width={{base:"100%", md:"100%", lg:"50%"}} 
-          height={{base:"60vh", md:"70vh", lg: "80vh"}} 
+          height={{base:"60vh", md:"70vh", lg: "100vh"}} 
         >
           <Output editorRef={editorRef} language={language} />
         </Box>
