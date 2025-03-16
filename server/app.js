@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 8000;
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
     cors: {
-        origin: 'http://localhost:5173',
+        origin: 'http://localhost:5173','https://code-mesh.vercel.app'
         credentials: true,
     }
 });
@@ -24,7 +24,7 @@ const io = new Server(httpServer, {
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'http://localhost:5173','https://code-mesh.vercel.app',
     credentials: true,
 }));
 
