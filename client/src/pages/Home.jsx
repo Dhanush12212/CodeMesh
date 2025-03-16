@@ -6,7 +6,7 @@ import CodeEditor from '../components/CodeEditor';
 function Home() {
   const { roomId } = useParams();  
   return (
-    <Box minH="100vh" bg="#0f0a19" color="gray.500" px={6} py={8}>
+    <Box minH="100vh" bg="#0f0a19" color="gray.500" px={[0, 4, 6, 8]} py={8}>
       <CodeEditor roomId={roomId} /> 
     </Box>
   );
