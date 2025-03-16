@@ -54,7 +54,7 @@ function CodeEditor({ roomId }) {
 
   return (
     <Box width="100%">
-      {/* Stack handles responsive layout */}
+      
       <Stack
         direction={{ base: "column", md: "row" }}
         spacing={4}
