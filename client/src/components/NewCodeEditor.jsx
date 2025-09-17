@@ -1,12 +1,11 @@
-import { Box, Stack } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import { Editor } from '@monaco-editor/react';
 import React, { useState, useRef, useEffect } from 'react';
 import LanguageSelector from './LanguageSelector';
 import { CODE_SNIPPETS } from '../constants';
-import Output from './Output';
 import { socket } from '../socket/socket';
 
-function CodeEditor({ roomId }) {
+function NewCodeEditor({ roomId }) {
   const [language, setLanguage] = useState('javascript');
   const [value, setValue] = useState(CODE_SNIPPETS['javascript']);
   const editorRef = useRef(null);
@@ -50,42 +49,37 @@ function CodeEditor({ roomId }) {
   const onMount = (editor) => {
     editorRef.current = editor;
     editor.focus();
-  }
+  };
 
   return (
-    <Box width="100%">
+    <Flex direction="column" width="100vw" height="100vh" bg="gray.900">
       
-      <Stack
-        direction={{ base: "column", md: "row" }}
-        spacing={4}
-        align="stretch"
+      {/* Top Toolbar */}
+      <Box 
+        p={3} 
+        bg="gray.800" 
+        borderBottom="1px solid" 
+        borderColor="gray.700"
+        shadow="sm"
       >
-        <Box 
-          width={{base:"100%", md:"100%", lg:"70%"}} 
-          mt={3}
-          mb={20}
-          height={{base:"60vh", md:"70vh", lg:"90vh"}} 
-        >
-          <LanguageSelector language={language} onSelect={onSelect}  />
-          <Editor
-            options={{ minimap: { enabled: false } }}
-            height="100%" 
-            theme="vs-dark"
-            value={value}
-            language={language}
-            onMount={onMount}
-            onChange={handleOnChange}
-          />
-        </Box>
-        <Box 
-          width={{base:"100%", md:"100%", lg:"40%"}} 
-          height={{base:"90vh", md:"70vh", lg: "100vh"}} 
-        >
-          <Output editorRef={editorRef} language={language} />
-        </Box>
-      </Stack>
-    </Box>
+        <LanguageSelector language={language} onSelect={onSelect} />
+      </Box>
+
+      {/* Fullscreen Editor */}
+      <Box flex="1" overflow="hidden">
+        <Editor
+          options={{ minimap: { enabled: false }, fontSize: 14, padding: { top: 12 } }}
+          height="100%"
+          width="100%"
+          theme="vs-dark"
+          value={value}
+          language={language}
+          onMount={onMount}
+          onChange={handleOnChange}
+        />
+      </Box>
+    </Flex>
   );
 }
 
-export default CodeEditor;
+export default NewCodeEditor;
